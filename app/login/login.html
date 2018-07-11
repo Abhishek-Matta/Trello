@@ -1,0 +1,17 @@
+<app-headercomp></app-headercomp>
+<h1>This is the login component</h1>
+
+<form #loginform="ngForm" (ngSubmit)="loginsub(loginform.value)">
+    <input type="text" name="email" #username="ngModel" ngModel required minlength="5">
+    <br><br>
+    <input type="text" name="password" ngModel required>
+    <br><br>
+    <div *ngIf="username.errors">
+        <small *ngIf="username.errors.required && username.touched">username is required</small>
+        <small *ngIf="username.errors.minlength && username.dirty" class="bg-info">
+            {{username.errors.minlength.requiredLength-username.errors.minlength.actualLength}} more characters
+        </small>
+    </div>
+<button type="submit" class="btn btn-success" [disabled]="loginform.invalid">Submit</button>
+</form>
+<button routerLink="signup" class="btn btn-warning">Signup</button>

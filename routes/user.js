@@ -4,6 +4,7 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
+var Board=require('../models/board');
 
 router.post('/', function (req, res) {
     var user = new User({
@@ -58,6 +59,47 @@ router.post('/signin', function(req, res, next) {
             userId: user._id
         });
     });
+});
+
+router.post('/postboard', function (req, res) {
+    var decode=jwt.verify(req.body.token,'secret');
+
+    var board = new Board({
+        name: req.body.name,
+       swimlane: req.body.swimlane,
+       userid: decode.user._id
+    });
+    board.save(function(err, result) {
+        if (err) {
+            return res.status(500).json({
+                message: 'An error occurred',
+                error: err
+            });
+        }
+        res.status(201).json({
+            success:true,
+            message: 'Board created',
+            obj: result
+        });
+    });
+});
+
+router.get('/getboards/:id', function (req, res) {
+    Board.find({userid:req.params.id}).exec((err,data)=>{
+        if(err){
+            return res.status(500).json({
+                message: 'An error occurred',
+                error: err
+            });
+        }
+        else{
+            res.status(201).json({
+                success:true,
+                message: 'All boards',
+                boards: data
+            }); 
+        }
+    })
 });
 
 module.exports = router;

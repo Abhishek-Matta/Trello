@@ -28,10 +28,13 @@ app.use(function(req, res, next) {
   
 app.use('/user',userroute)
 
-app.use(function(req,res){
-    res.sendFile(__dirname,'dist/newapp2/index.html')
-});
+// app.use(function(req,res){
+//     res.sendFile(__dirname,'dist/newapp2/index.html')
+// });
 
+app.get('*',function(req,res){
+    res.sendFile('index.html', { root:path.join(__dirname, 'dist/newapp2')})
+});
 
 app.listen(5000,function(){
 console.log("Listening on port 5000..")

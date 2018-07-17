@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-board',
-  template: `<div *ngIf="checklen ;else nodata"><p *ngFor="let el of data">{{el.name}} <br> {{el.swimlane}}</p></div>
+  template: `<div *ngIf="checklen ;else nodata"><p *ngFor="let el of data" (click)="viewblog(el._id)">{{el.name}} <br> {{el.swimlane}}</p></div>
   <ng-template #nodata><p>You have no boards</p></ng-template>`
 })
 export class AllBoardsComponent {
@@ -19,6 +19,9 @@ export class AllBoardsComponent {
                 }
             }
         })
+    }
+    viewblog(bid){
+        this.router.navigate(['/board','user',bid])
     }
 
 }

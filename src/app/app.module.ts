@@ -25,9 +25,6 @@ import { Guard } from './services/auth.guard';
       path:'dashboard',
       canActivate:[Guard],
       loadChildren:'./dashboard/dashboard.module#DashboardModule'
-    },{
-      path:'board',
-      loadChildren:'./board/board.module#BoardModule'
     }])
   ],
   providers: [Guard],

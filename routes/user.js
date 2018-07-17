@@ -66,7 +66,6 @@ router.post('/postboard', function (req, res) {
 
     var board = new Board({
         name: req.body.name,
-       swimlane: req.body.swimlane,
        userid: decode.user._id
     });
     board.save(function(err, result) {
@@ -102,4 +101,21 @@ router.get('/getboards/:id', function (req, res) {
     })
 });
 
+router.get('/getone/:id', function (req, res) {
+    Board.find({_id:req.params.id}).exec((err,data)=>{
+        if(err){
+            return res.status(500).json({
+                message: 'An error occurred',
+                error: err
+            });
+        }
+        else{
+            res.status(201).json({
+                success:true,
+                message: 'All boards',
+                boards: data
+            }); 
+        }
+    })
+});
 module.exports = router;

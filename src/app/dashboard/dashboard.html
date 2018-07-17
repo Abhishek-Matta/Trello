@@ -4,6 +4,19 @@
     <div class="container">
       <h1 class="display-4">You can now create new boards</h1>
       <br>
-      <button class="btn btn-primary btn-large" routerLink="/board">Create Board</button>
+      <form #boardform="ngForm" (ngSubmit)="boardsub(boardform.value)">
+        <div class="form-group">
+          <label>Name</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="far fa-envelope"></i>
+              </span>
+            </div>
+            <input type="text" name="name" ngModel required minlength="5" class="form-control",required>
+          </div> 
+        </div>
+        <button type="submit" class="btn btn-success btn-block" [disabled]="boardform.invalid">Submit</button>
+      </form>
     </div>
   </div>

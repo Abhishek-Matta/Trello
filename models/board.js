@@ -4,8 +4,13 @@ var mongooseUniqueValidator = require('mongoose-unique-validator');
 
 var schema = new Schema({
     userid:{type:String},
-    swimlane: {type: String, required: true},
-    name: {type: String}
+    swimlane: [{
+        name:{type:String},
+        card:[{
+            name:{type:String}
+        }]
+    }],
+    name: {type: String,required:true}
 });
 
 schema.plugin(mongooseUniqueValidator);

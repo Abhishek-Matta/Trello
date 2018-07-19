@@ -3,8 +3,20 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-board',
-  template: `<div *ngIf="checklen ;else nodata"><p *ngFor="let el of data" (click)="viewblog(el._id)">{{el.name}} <br> {{el.swimlane}}</p></div>
+  selector: 'app-allboard',
+  template: `<br><br><br><div *ngIf="checklen ;else nodata">
+  <div class="row">
+  <div *ngFor="let el of data" (click)="viewblog(el._id)" class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
+        <div class="card">
+          <h3 class="card-header text-center text-white bg-primary">{{el.name}}</h3>
+          <div class="card-body">
+          <b>Click Here to see Board</b>
+          </div>
+        </div>
+        <br>
+    </div>
+  </div>
+  </div>
   <ng-template #nodata><p>You have no boards</p></ng-template>`
 })
 export class AllBoardsComponent {
@@ -21,7 +33,7 @@ export class AllBoardsComponent {
         })
     }
     viewblog(bid){
-        this.router.navigate(['/board','user',bid])
+        this.router.navigate(['/dashboard','user',bid])
     }
 
 }

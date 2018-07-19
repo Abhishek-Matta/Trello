@@ -72,7 +72,7 @@ margin-top:.5rem;
         <a class="nav-link" href="#">Page-2</a>
       </li>
       <li class="nav-item" *ngIf="isloggedin()">
-        <a class="nav-link" href="#" routerLink="/board/allboards">See your board</a>
+        <a class="nav-link" href="#" routerLink="/dashboard/board/allboards">See your boards</a>
       </li>
        </ul>
   <div id="wrap">
@@ -90,7 +90,7 @@ export class HeaderComponent {
   }
   logout(){
       localStorage.clear();
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
 
   }
   isloggedin(){

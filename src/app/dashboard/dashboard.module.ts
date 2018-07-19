@@ -6,6 +6,8 @@ import { AllBoardsComponent } from '../board/allboards.component';
 import { BoardComponent } from '../board/board.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule,HttpClient } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -14,16 +16,17 @@ import { FormsModule } from '@angular/forms';
     BoardComponent
   ],
   imports: [
+    HttpClientModule,
     FormsModule,
     CommonModule,
     RouterModule.forChild([{
-        path:'',
-        component:DashboardComponent
+      path:'',
+      component:DashboardComponent
     },{
-      path:'/board/allboards',
+      path:'board/allboards',
       component:AllBoardsComponent
     },{
-      path:'/board/user/:id',
+      path:'user/:id',
       component:BoardComponent
     }])
   ],

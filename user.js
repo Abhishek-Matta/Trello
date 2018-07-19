@@ -120,11 +120,7 @@ router.get('/getone/:id', function (req, res) {
     })
 });
 router.post('/swimlane', function (req, res) {
-    Board.update({"_id":req.body.id},{$push:{
-        "swimlane":{
-            "name":req.body.name
-        }
-    }}).exec((err,data)=>{
+    Board.findById(req.body.id).exec((err,data)=>{
         if(err){
             return res.status(500).json({
                 message: 'An error occurred',
@@ -132,128 +128,54 @@ router.post('/swimlane', function (req, res) {
             });
         }
         else{
-
+            data.swimlane=[{name:req.body.name}]
+            data.save(function(err, result) {
+                if (err) {
+                    return res.status(500).json({
+                        message: 'An error occurred',
+                        error: err
+                    });
+                }
+                else{
                     res.status(201).json({
                         success:true,
                         message: 'Data Saved',
-                        check:data
+                        check:result
                     });
-            }
-            
+                }
+                
+            });
+        }
     })
 });
-
 router.post('/card', function (req, res) {
-    Board.update({"_id": req.body.id,"swimlane._id":req.body.swimid},{
-        $push:{"swimlane.$.card":{"name": req.body.name}}
-    }).exec((err,data)=>{
+    Board.findById(req.body.id).exec((err,data)=>{
         if(err){
             return res.status(500).json({
-                success:false,
                 message: 'An error occurred',
                 error: err
             });
         }
         else{
 
+            data.swimlane=[{card:[{name:req.body.name}]}]
+            data.save(function(err, result) {
+                if (err) {
+                    return res.status(500).json({
+                        message: 'An error occurred',
+                        error: err
+                    });
+                }
+                else{
                     res.status(201).json({
                         success:true,
                         message: 'Card Saved',
-                        check:data
+                        check:result
                     });
+                }
+                
+            });
         }
     })
 });
-
-router.post('/card/edit', function (req, res) {
-    Board.findOne({"_id": req.body.id,"swimlane._id":req.body.swimid}, {"swimlane.$":1}, (err, data)=>{
-        if(err){
-            return res.status(500).json({
-                success:false,
-                message: 'An error occurred',
-                error: err
-            });
-        }
-        else{
-             var card = data.swimlane[0].card;
-              var newCard = card.map(ele=>{
-                  if(ele._id==req.body.cardid){
-                      ele.name=req.body.name;
-                      return ele
-                  }else{
-                      return ele
-                 }
-              })
-            }
-        Board.update({"_id": req.body.id,"swimlane._id":req.body.swimid}, {$set:{'swimlane.$.card':newCard}}, (err, data)=>{
-            if(err){
-                return res.status(500).json({
-                    success:false,
-                    message: 'An error occurred',
-                    error: err
-                });
-            }
-            else{
-                res.status(201).json({
-                    success:true,
-                    message: 'Card Updated',
-                    check:data
-                }); 
-            }
-         })
-       
-     }) 
-});
-
-router.post('/card/delete', function (req, res) {
-    Board.findOne({"_id": req.body.id,"swimlane._id":req.body.swimid}, {"swimlane.$":1}, (err, data)=>{
-        if(err){
-            return res.status(500).json({
-                success:false,
-                message: 'An error occurred',
-                error: err
-            });
-        }
-        else{
-             var card = data.swimlane[0].card;
-              var newCard = card.filter(ele=>{
-                  if(ele._id==req.body.cardid){
-                      return false;
-                  }
-                  return true;
-              }).map((ele)=>{
-                  return ele;
-              });
-            }
-        Board.update({"_id": req.body.id,"swimlane._id":req.body.swimid}, {$set:{'swimlane.$.card':newCard}}, (err, data)=>{
-            if(err){
-                return res.status(500).json({
-                    success:false,
-                    message: 'An error occurred',
-                    error: err
-                });
-            }
-            else{
-                res.status(201).json({
-                    success:true,
-                    message: 'Card Deleted',
-                    check:data
-                }); 
-            }
-         })
-       
-     }) 
-});
-
-router.get('/check', function (req, res) {
-    jwt.verify(req.headers.token,'secret',(err,decoded)=>{
-        if(err){
-            res.status(401).send(false);
-        }
-        else{
-            res.status(201).send(true);
-        }
-    });
-});
-
 module.exports = router;

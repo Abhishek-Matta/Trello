@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header.component';
 import { Guard } from './services/auth.guard';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,11 +13,12 @@ import { Guard } from './services/auth.guard';
     HeaderComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([{
       path:'',
-      redirectTo:'login',
+      redirectTo:'dashboard',
       pathMatch:'full'
     },{
       path:'login',

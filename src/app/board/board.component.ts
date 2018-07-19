@@ -7,13 +7,92 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './board.html',
   styleUrls: []
 })
-export class BoardComponent {
+export class BoardComponent{
     data;
-    constructor(private router:Router,private http:HttpClient,private activeRoute: ActivatedRoute){
+    checkswim=true;
+    checkcard=true;
+    ngOnInit(){
+        this.getalldata()
+    }
+    getalldata(){
         this.http.get('/user/getone/'+this.activeRoute.snapshot.params['id']).subscribe((res:any)=>{
             if(res.success){
-                this.data=res.boards;        
+                this.data=res.boards; 
+                if(this.data.swimlane.length==0){
+                    this.checkswim=false;
+                }  
+                if(this.data.swimlane[0].card.length==0){
+                    this.checkcard=false;
+                }     
             }
         })
     }
+    constructor(private router:Router,private http:HttpClient,private activeRoute: ActivatedRoute){
+        this.http.get('/user/getone/'+this.activeRoute.snapshot.params['id']).subscribe((res:any)=>{
+            if(res.success){
+                this.data=res.boards; 
+                if(this.data.swimlane.length==0){
+                    this.checkswim=false;
+                }  
+                if(this.data.swimlane[0].card.length==0){
+                    this.checkcard=false;
+                }     
+            }
+        })
+    }
+
+    id=this.activeRoute.snapshot.params['id'];
+
+     swimsub(form){
+            this.http.post('/user/swimlane',{
+                id:this.id,
+                name:form.name
+            }).subscribe((res:any)=>{
+                if(res.success){
+                    console.log(res.message)
+                    this.getalldata()
+                }
+            })
+     }
+
+     cardsub(form,swimid){
+        this.http.post('/user/card',{
+            id:this.id,
+            name:form.name,
+            swimid:swimid
+        }).subscribe((res:any)=>{
+            if(res.success){
+                console.log(res.message)
+                this.getalldata()
+            }
+        })
+ }
+
+ editcard(form,cardid,swimid){
+    this.http.post('/user/card/edit',{
+        id:this.id,
+        cardid:cardid,
+        swimid:swimid,
+        name:form.name
+    }).subscribe((res:any)=>{
+        if(res.success){
+            console.log(res.message)
+            this.getalldata()
+        }
+    })
+}
+
+delcard(cardid,swimid){
+    this.http.post('/user/card/delete',{
+        id:this.id,
+        cardid:cardid,
+        swimid:swimid
+    }).subscribe((res:any)=>{
+        if(res.success){
+            console.log(res.message)
+            this.getalldata()
+        }
+    })
+}
+
 }

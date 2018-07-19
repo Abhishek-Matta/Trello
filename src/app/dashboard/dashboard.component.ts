@@ -10,7 +10,6 @@ import { HttpClient } from '@angular/common/http';
 export class DashboardComponent {
   token;
   constructor(private router:Router,private http:HttpClient){
-    console.log('called')
   }
   boardsub(form){
       this.token=localStorage.getItem('token')

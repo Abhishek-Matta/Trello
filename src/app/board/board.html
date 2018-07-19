@@ -13,17 +13,71 @@
   
   </style>
   <div class="container">
+    <div style="height:auto;width:auto;">
     <div class="row justify-content-center">
       <div class="col-md-6 col-sm-6 col-xs-6">
         <div class="card">
-          <h3 class="card-header text-center text-white bg-primary">Your Board</h3>
+          <h3 class="card-header text-center text-white bg-primary">{{data.name}}</h3>
           <div class="card-body">
-            <p>{{data.name}}</p>
+
+      
+            <div *ngIf="data && checkswim;else noswim">
+              <div class="row">
+              <div *ngFor="let el of data.swimlane" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="card" style="border: 2px solid black;">
+                <h3 class="card-header text-center text-white bg-primary">{{el.name}}</h3>
+                <div class="card-body">
+
+
+                  <div *ngIf="checkcard;else nocard">
+                      <div *ngFor="let k of el.card">
+                        <p>{{k.name}}</p>
+
+                        <form #cardedit="ngForm" (ngSubmit)="editcard(cardedit.value,k._id,el._id)">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                  <input type="text" name="name" ngModel required class="form-control" required>
+                                </div> 
+                              </div> 
+                        <button type="submit" class="btn btn-primary" [disabled]="cardedit.invalid">edit</button>
+                      </form>
+                      <button class="btn btn-danger" (click)="delcard(k._id,el._id)">Delete</button>
+                      <hr>
+                        <br>
+                      </div>
+                  </div>
+                </div>
+                  <ng-template #nocard><p>You have no cards</p></ng-template>
+                    <form #cardform="ngForm" (ngSubmit)="cardsub(cardform.value,el._id)">
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                              <input type="text" name="name" ngModel required class="form-control" required>
+                            </div> 
+                          </div> 
+                    <button type="submit" class="btn btn-primary" [disabled]="cardform.invalid">Add Card</button>
+                  </form>
+                  </div>
+                  <hr>
+                  <br>
+        
+                  </div>
+              </div>
+            </div>
+            <ng-template #noswim><p>You have no swimlanes</p></ng-template>
             <!-- <button routerLink="signup" class="btn btn-warnin
                   g">Signup</button> -->
+         
           </div>
-  
+          <form #swimform="ngForm" (ngSubmit)="swimsub(swimform.value)">
+              <div class="form-group">
+                  <div class="input-group mb-3">
+                    <input type="text" name="name" ngModel required class="form-control" required>
+                  </div> 
+                </div> 
+          <button type="submit" class="btn btn-primary" [disabled]="swimform.invalid">Add Swimlane</button>
+        </form>
         </div>
       </div>
+    </div>
     </div>
   </div>

@@ -11,21 +11,25 @@
       }
     }
   
+    
+  
   </style>
-  <div class="container">
-    <div style="height:auto;width:auto;">
-    <div class="row justify-content-center">
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="card">
-          <h3 class="card-header text-center text-white bg-primary">{{data.name}}</h3>
-          <div class="card-body">
+  
+      
+    
+ <br><br><br> 
+       
+  <nav class="navbar navbar-dark bg-custom">
+      <span class="navbar-brand mb-0 h1">{{data?.name}}</span>
+    </nav>
+          
 
       
             <div *ngIf="data && checkswim;else noswim">
               <div class="row">
-              <div *ngFor="let el of data.swimlane" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <div class="card" style="border: 2px solid black;">
-                <h3 class="card-header text-center text-white bg-primary">{{el.name}}</h3>
+              <div *ngFor="let el of data.swimlane" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div class="card" style="border: 2px solid black; width: 15rem; margin-left: 5px;" >
+                <h4 class="card-header text-center text-white bg-primary">{{el.name}}</h4>
                 <div class="card-body">
 
 
@@ -48,7 +52,7 @@
                   </div>
                 </div>
                   <ng-template #nocard><p>You have no cards</p></ng-template>
-                    <form #cardform="ngForm" (ngSubmit)="cardsub(cardform.value,el._id)">
+                    <form #cardform="ngForm" (ngSubmit)="cardsub(cardform.value,el._id)" >
                         <div class="form-group">
                             <div class="input-group mb-3">
                               <input type="text" name="name" ngModel required class="form-control" required>
@@ -67,7 +71,7 @@
             <!-- <button routerLink="signup" class="btn btn-warnin
                   g">Signup</button> -->
          
-          </div>
+          <div style="width:50%; margin: auto">
           <form #swimform="ngForm" (ngSubmit)="swimsub(swimform.value)">
               <div class="form-group">
                   <div class="input-group mb-3">
@@ -77,7 +81,7 @@
           <button type="submit" class="btn btn-primary" [disabled]="swimform.invalid">Add Swimlane</button>
         </form>
         </div>
-      </div>
-    </div>
-    </div>
-  </div>
+    
+   
+    
+  

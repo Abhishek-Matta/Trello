@@ -103,10 +103,10 @@ router.get('/getboards/:id', function (req, res) {
 });
 
 router.get('/getone/:id', function (req, res) {
-    Board.findById(req.params.id).exec((err,data)=>{
+    Board.find({userid:req.params.id}).exec((err,data)=>{
         if(err){
             return res.status(500).json({
-                message: 'An error occurred',
+                message: 'An error occurred',   
                 error: err
             });
         }

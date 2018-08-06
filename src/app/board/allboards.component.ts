@@ -4,20 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-allboard',
-  template: `<br><br><br><div *ngIf="checklen ;else nodata">
-  <div class="row">
-  <div *ngFor="let el of data" (click)="viewblog(el._id)" class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
-        <div class="card">
-          <h3 class="card-header text-center text-white bg-primary">{{el.name}}</h3>
-          <div class="card-body">
-          <b>Click Here to see Board</b>
-          </div>
-        </div>
-        <br>
-    </div>
-  </div>
-  </div>
-  <ng-template #nodata><p>You have no boards</p></ng-template>`
+  templateUrl:'allboards.html' 
 })
 export class AllBoardsComponent {
     data;

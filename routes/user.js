@@ -10,7 +10,7 @@ router.post('/', function (req, res) {
     var user = new User({
         fullName: req.body.fullname,
        username: req.body.username,
-       address: req.body.address,
+        address: req.body.address,
         password: bcrypt.hashSync(req.body.password, 10),
         email: req.body.email
     });
@@ -122,7 +122,7 @@ router.get('/getone/:id', function (req, res) {
 router.post('/swimlane', function (req, res) {
     Board.update({"_id":req.body.id},{$push:{
         "swimlane":{
-            "name":req.body.name
+           "name":req.body.name
         }
     }}).exec((err,data)=>{
         if(err){
@@ -163,7 +163,7 @@ router.post('/card', function (req, res) {
                     });
         }
     })
-});
+}); 
 
 router.post('/card/edit', function (req, res) {
     Board.findOne({"_id": req.body.id,"swimlane._id":req.body.swimid}, {"swimlane.$":1}, (err, data)=>{
@@ -226,7 +226,7 @@ router.post('/card/delete', function (req, res) {
               });
             }
         Board.update({"_id": req.body.id,"swimlane._id":req.body.swimid}, {$set:{'swimlane.$.card':newCard}}, (err, data)=>{
-            if(err){
+            if(err){    
                 return res.status(500).json({
                     success:false,
                     message: 'An error occurred',

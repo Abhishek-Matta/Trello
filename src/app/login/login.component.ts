@@ -1,14 +1,19 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+
+ 
+
+
 
 @Component({
   templateUrl: './login.html'
 })
-export class LoginComponent {
-    constructor(private router:Router,private http:HttpClient){
+export class LoginComponent  {
 
-    }
+
+    constructor(private router:Router,private http:HttpClient ){}
+
     loginsub(form){
         
         this.http.post('/user/signin',{
@@ -22,6 +27,11 @@ export class LoginComponent {
             }
         })
     }
+ 
+    
+      
+
+      
 }
 // for creating new item localStorage.setItem('name',value)
 

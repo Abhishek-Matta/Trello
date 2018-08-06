@@ -2,9 +2,13 @@ const express=require('express');
 const mongoose=require('mongoose');
 const path=require('path');
 var bodyParser=require('body-parser');
+
+var passport = require('passport');
+var social = require('./passport/passport')(app,passport);
+
 var app=express();
 var userroute=require('./routes/user.js')
-mongoose.connect('mongodb://trello667788:password123@ds131711.mlab.com:31711/trello');
+mongoose.connect('mongodb://trello667788:password123@ds131711.mlab.com:31711/trello',{ useNewUrlParser: true });
 
 var db=mongoose.connection;
 

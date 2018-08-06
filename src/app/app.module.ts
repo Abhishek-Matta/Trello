@@ -7,6 +7,12 @@ import { HeaderComponent } from './header.component';
 import { Guard } from './services/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 
+
+ 
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +35,10 @@ import { HttpClientModule } from '@angular/common/http';
       loadChildren:'./dashboard/dashboard.module#DashboardModule'
     }])
   ],
-  providers: [Guard],
+  providers: [Guard,
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

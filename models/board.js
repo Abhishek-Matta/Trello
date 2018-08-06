@@ -4,7 +4,7 @@ var mongooseUniqueValidator = require('mongoose-unique-validator');
 
 var schema = new Schema({
     userid:{type:String},
-    swimlane: [{
+    swimlane: [{    
         name:{type:String},
         card:[{
             name:{type:String}
@@ -22,6 +22,7 @@ schema.plugin(mongooseUniqueValidator);
  *              ele.name=req.body.name;
  *              return ele
  *          }else{
+ * 
  *              return map
  *          }
  *      })

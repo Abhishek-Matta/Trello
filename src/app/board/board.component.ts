@@ -21,7 +21,7 @@ export class BoardComponent{
                 if(this.data.swimlane.length==0){
                     this.checkswim=false;
                 }  
-                if(this.data.swimlane[0].card.length==0){
+                if(this.data.swimlane[0]!=null){
                     this.checkcard=false;
                 }     
             }
@@ -34,7 +34,7 @@ export class BoardComponent{
                 if(this.data.swimlane.length==0){
                     this.checkswim=false;
                 }  
-                if(this.data.swimlane[0].card.length==0){
+                if(this.data.swimlane==null){
                     this.checkcard=false;
                 }     
             }

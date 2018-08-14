@@ -213,7 +213,7 @@ router.post('/card/delete', function (req, res) {
                 message: 'An error occurred',
                 error: err
             });
-        }
+        }   
         else{
              var card = data.swimlane[0].card;
               var newCard = card.filter(ele=>{

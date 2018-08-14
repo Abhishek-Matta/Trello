@@ -1,3 +1,5 @@
+//This file is not useful    non-working feature
+
 var  FacebookStrategy = require('passport-facebook').Strategy;
 var User              = require('../models/user');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;

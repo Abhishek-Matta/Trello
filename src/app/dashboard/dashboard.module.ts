@@ -7,6 +7,7 @@ import { BoardComponent } from '../board/board.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
+import {NgDragDropModule} from 'ng-drag-drop';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { HttpClientModule,HttpClient } from '@angular/common/http';
     HttpClientModule,
     FormsModule,
     CommonModule,
+    NgDragDropModule.forRoot(), 
     RouterModule.forChild([{
       path:'',
       component:DashboardComponent

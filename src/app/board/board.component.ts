@@ -11,7 +11,12 @@ export class BoardComponent{
     data;
     checkswim=true;
     checkcard=true;
-    ngOnInit(){
+    public targetItem: any = null;
+    a; b;
+     
+   
+
+    ngOnInit(){ 
         this.getalldata()
     }
     getalldata(){
@@ -21,7 +26,7 @@ export class BoardComponent{
                 if(this.data.swimlane.length==0){
                     this.checkswim=false;
                 }  
-                if(this.data.swimlane[0]!=null){
+                if(this.data.swimlane==null){
                     this.checkcard=false;
                 }     
             }
@@ -35,9 +40,9 @@ export class BoardComponent{
                     this.checkswim=false;
                 }  
                 if(this.data.swimlane==null){
-                    this.checkcard=false;
-                }     
-            }
+                    this.checkcard=false; 
+                }      
+            } 
         })
     }
 
@@ -68,6 +73,33 @@ export class BoardComponent{
         })
  }
 
+ onItemDrop(e: any,swimid,cardid) {
+ 
+    this.http.post('/user/card',{
+        id:this.id,
+        name:e.dragData.name,
+        swimid:swimid
+    }).subscribe((res:any)=>{
+        if(res.success){
+            console.log('Card dropped')
+            this.getalldata()
+        }
+    })
+ }
+ onItemDrag(swimid,cardid){
+        this.http.post('/user/card/delete',{
+            id:this.id,
+            cardid:cardid, 
+            swimid:swimid
+        }).subscribe((res:any)=>{
+            if(res.success){
+                
+                this.getalldata()
+            }
+        })
+    
+ }
+
  editcard(form,cardid,swimid){
     this.http.post('/user/card/edit',{
         id:this.id,
@@ -85,7 +117,7 @@ export class BoardComponent{
 delcard(cardid,swimid){
     this.http.post('/user/card/delete',{
         id:this.id,
-        cardid:cardid,
+        cardid:cardid, 
         swimid:swimid
     }).subscribe((res:any)=>{
         if(res.success){
@@ -94,5 +126,7 @@ delcard(cardid,swimid){
         }
     })
 }
+
+
 
 }

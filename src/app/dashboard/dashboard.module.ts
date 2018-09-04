@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AllBoardsComponent } from '../board/allboards.component';
 import { BoardComponent } from '../board/board.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 import {NgDragDropModule} from 'ng-drag-drop';
 
@@ -19,6 +19,7 @@ import {NgDragDropModule} from 'ng-drag-drop';
   imports: [
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     NgDragDropModule.forRoot(), 
     RouterModule.forChild([{

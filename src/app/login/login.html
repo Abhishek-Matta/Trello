@@ -22,7 +22,7 @@
 <br><br><br>
 <h1 style="text-align: center; color:white;">Welcome to Trello!</h1><br>
 <h1 style="text-align: center; color:white;">Log in to Trello</h1>
-<h5 style="text-align: center; color:white;"> or <span style="color:#52a5cb;"><u>create an account</u> </span></h5>
+<a routerLink="/login/signup"><h5 style="text-align: center; color:white;"> or <span style="color:#52a5cb;"><u>create an account</u> </span></h5></a>
 
 <div class="container">
   <div class="row justify-content-center">
@@ -33,18 +33,22 @@
 
                   <div class="form-group">
                     <label for="email" style="color: white; font-weight: 600">Email <span style="color:#52a5cb;">(or username)</span></label>
-                    <input type="email" name="email" #username="ngModel"  ngModel required class="form-control" >
+                    <input type="email" name="email" #username="ngModel"  ngModel minlength="6" required class="form-control" >
                   </div>
 
                   <div class="form-group">  
                     <label for="pwd" style="color: white; font-weight: bold">Password:</label>
-                    <input type="password" name="password" ngModel required class="form-control" >
+                    <input type="password" name="password" #password="ngModel" ngModel required class="form-control" >
                   </div>
                   <div *ngIf="username.errors">
-                    <small *ngIf="username.errors.required && username.touched">username is required</small>
-                    <small *ngIf="username.errors.minlength && username.dirty" class="bg-info">
+                    <small *ngIf="username.errors.required && username.touched" class="btn-danger">Username is required</small>
+                    <small *ngIf="username.errors.minlength && username.dirty" class="btn-info"  >
                       {{username.errors.minlength.requiredLength-username.errors.minlength.actualLength}} more characters
                     </small>
+                  </div>
+
+                  <div *ngIf="password.errors">
+                    <small *ngIf="password.errors.required && password.touched" class="btn-danger">Password is required</small>
                   </div>
               
                   <div class="centeredButton" >

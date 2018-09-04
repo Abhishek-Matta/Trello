@@ -73,7 +73,7 @@ export class BoardComponent{
         })
  }
 
- onItemDrop(e: any,swimid,cardid) {
+ onItemDrop(e: any,swimid) {
  
     this.http.post('/user/card',{
         id:this.id,

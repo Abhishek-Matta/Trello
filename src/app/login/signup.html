@@ -77,7 +77,7 @@
         </div>
           
           </div>
-          <div *ngIf="username.errors">
+          <!-- <div *ngIf="username.errors">
               <small *ngIf="username.errors.required && username.touched" class="btn-danger">Username is required</small>
               <small *ngIf="username.errors.minlength && username.dirty" class="btn-info">
                   {{username.errors.minlength.requiredLength-username.errors.minlength.actualLength}} more characters
@@ -107,10 +107,10 @@
       <small *ngIf="fullname.errors.minlength && username.dirty" class="btn-danger">
           Invalid Fullname!
       </small>
-  </div>
+  </div> -->
       
       </div>
-      <button type="submit" [disabled]="signupform.invalid" class="btn btn-primary btn-block col-md-12">Submit</button>
+      <button type="submit" class="btn btn-primary btn-block col-md-12">Submit</button>
       </form>
         
         </div>
